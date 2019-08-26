@@ -9,10 +9,29 @@
 <div class="container body-content">
 
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+    <h3><p th:text="'Listings: ' + ${jobs.size()}"></p></h3>
 
     <!-- TODO #3 - Use the same list display from search.html -->
 
+    <div th:each="map: ${jobs}">
+        <table class="job-listing" >
+
+            <tr th:each="row : ${map}">
+                <td th:text="${row.key}"></td>
+                <td th:text="${row.value}"></td>
+
+            </tr>
+            <hr/>
+        </table>
+    </div>
 </div>
 
 </body>
 </html>
+<!--
+<ul>
+    <li th:each="column : ${columns}">
+        <a th:href="@{/list/values(column=${column.key})}" th:text="${column.value}"></a>
+    </li>
+</ul>
+-->

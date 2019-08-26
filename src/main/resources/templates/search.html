@@ -36,7 +36,24 @@
 
     <hr />
 
+    <p th:text="'Your search type was: ' + ${searchType}"></p>
+    <p th:text="'Your search term was: ' + ${searchTerm}"></p>
+    <h3><p th:text="'Listings: ' + ${jobs.size()} + ' !'"></p></h3>
     <!-- TODO #2 - Loop over jobs map to display all job fields -->
+    <!--Turn this into a fragment and implememnt it here and also in list? -->
+
+
+    <div th:each="map: ${jobs}">
+    <table class="job-listing" >
+
+        <tr th:each="row : ${map}">
+            <td th:text="${row.key}"></td>
+            <td th:text="${row.value}"></td>
+
+        </tr>
+        <hr/>
+    </table>
+    </div>
 
 </div>
 

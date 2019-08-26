@@ -26,6 +26,21 @@
             </div>
         </div>
     </div>
+    <div th:fragment="jobs-list" class="container body-content">
+        <div th:fragment="jobs-list" class="container body-content" th:each="map: ${jobs}">
+            <table class="job-listing" >
+
+                <tr th:each="row : ${map}">
+                    <td th:text="${row.key}"></td>
+                    <td th:text="${row.value}"></td>
+
+                </tr>
+                <hr/>
+            </table>
+        </div>
+    </div>
+
+
 
 </body>
 </html>
