@@ -20,7 +20,7 @@
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                        th:checked="${column.key == 'ALL'}"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
@@ -35,10 +35,11 @@
     </form>
 
     <hr />
+    <div th:if="${jobs}">
+        <p th:text="'Your search type was: ' + ${searchType}"></p>
+        <p th:text="'Your search term was: ' + ${searchTerm}"></p>
+        <h3><p th:text="'Listings: ' + ${jobs.size()} + ' !'"></p></h3>
 
-    <p th:text="'Your search type was: ' + ${searchType}"></p>
-    <p th:text="'Your search term was: ' + ${searchTerm}"></p>
-    <h3><p th:text="'Listings: ' + ${jobs.size()} + ' !'"></p></h3>
     <!-- TODO #2 - Loop over jobs map to display all job fields -->
     <!--Turn this into a fragment and implememnt it here and also in list? -->
 
@@ -54,7 +55,7 @@
         <hr/>
     </table>
     </div>
-
+    </div>
 </div>
 
 </body>

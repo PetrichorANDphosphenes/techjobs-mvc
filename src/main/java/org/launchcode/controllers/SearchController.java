@@ -16,9 +16,10 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("search")
 public class SearchController {
-
+    ArrayList<HashMap<String, String>> jobs =JobData.findAll();
     @RequestMapping(value = "")
     public String search(Model model) {
+        ArrayList<HashMap<String, String>> jobs =JobData.findAll();
         model.addAttribute("columns", ListController.columnChoices);
         return "search";
     }
@@ -28,23 +29,26 @@ public class SearchController {
     @RequestMapping(value = "results")
     public String results(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
         model.addAttribute("columns", ListController.columnChoices);
-        model.addAttribute("searchTerm", searchTerm);
-        model.addAttribute("searchType", searchType);
+
         ArrayList<HashMap<String,String>> found = new ArrayList<HashMap<String, String>>();
 
-        if (searchType.equals("ALL")) {
+        if (searchType.equals("all")) {
 
             if (searchTerm.equals("") || searchTerm.length() == 0) {
                 //list all jobs
                 found = JobData.findAll();
-                model.addAttribute("title", "jobs");
-                model.addAttribute("jobs", found);
-                return "search";
+                model.addAttribute("searchTerm", searchTerm);
+                model.addAttribute("searchType", searchType);
 
             }
             else {
                 //findByValue
+                model.addAttribute("searchTerm", searchTerm);
+                model.addAttribute("searchType", searchType);
                 found = JobData.findByValue(searchTerm);
+                model.addAttribute("title", "jobs");
+                model.addAttribute("jobs", found);
+                return "search";
 
             }
 
@@ -53,6 +57,8 @@ public class SearchController {
 
             //find by "column" and value
             found = JobData.findByColumnAndValue(searchType, searchTerm);
+            model.addAttribute("searchTerm", searchTerm);
+            model.addAttribute("searchType", searchType);
 
         }
         model.addAttribute("title", "jobs");
